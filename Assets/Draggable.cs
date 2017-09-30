@@ -40,12 +40,10 @@ public class Draggable : MonoBehaviour {
 
   void OnMouseUp() {
     if(this.collision != null) {
-      if (this.collision.gameObject.CompareTag("tardigrade")) {
-         TardigradeController tardigrade = GameObject.FindObjectOfType(
-            typeof(TardigradeController)
-          ) as TardigradeController;
-          tardigrade.interact(this.gameObject);
-      }
+       TardigradeController tardigrade = GameObject.FindObjectOfType(
+          typeof(TardigradeController)
+        ) as TardigradeController;
+        tardigrade.interact(this.gameObject);
     }
     Destroy(this.rigidBody);
     transform.position = new Vector3(initialX, initialY);
@@ -53,10 +51,14 @@ public class Draggable : MonoBehaviour {
   }
 
   void OnCollisionEnter2D (Collision2D collision) {
-    this.collision = collision;
+    if(collision.gameObject.CompareTag("tardigrade")) {
+      this.collision = collision;
+    }
   }
 
   void OnCollisionExit2D (Collision2D collision) {
-    this.collision = null;
+    if(collision.gameObject.CompareTag("tardigrade")) {
+      this.collision = null;
+    }
   }
 }
