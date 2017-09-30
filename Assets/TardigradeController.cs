@@ -21,9 +21,9 @@ public class TardigradeController : MonoBehaviour {
 	*/
 	protected int[][] sensitivity = new int[3][];
 
-	protected SpriteRenderer redSprite;
-	protected SpriteRenderer greenSprite;
-	protected float opacity = 0f;
+	protected static SpriteRenderer redSprite;
+	protected static SpriteRenderer greenSprite;
+	protected static float opacity = 0f;
 
 	public int potionsRemaining = 3;
 	public int foodRemaining = 1;
@@ -35,14 +35,18 @@ public class TardigradeController : MonoBehaviour {
 		SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
 		for(int counter = 0; counter < sprites.Length; counter++) {
 			if(sprites[counter].sprite.name.Contains("Red")) {
-				this.redSprite = sprites[counter];
-				this.redSprite.color = new Color(1f, 1f, 1f, 0f);
+				redSprite = sprites[counter];
+				redSprite.color = new Color(1f, 1f, 1f, 0f);
 			}
 			if(sprites[counter].sprite.name.Contains("Green")) {
-				this.greenSprite = sprites[counter];
-				this.greenSprite.color = new Color(1f, 1f, 1f, 0f);
+				greenSprite = sprites[counter];
+				greenSprite.color = new Color(1f, 1f, 1f, 0f);
 			}
 		}
+
+	}
+
+	public void OnEnable() {
 
 	}
 
@@ -57,22 +61,28 @@ public class TardigradeController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
+		if(opacity > 0) {
+			redSprite.color = new Color(1f, 1f, 1f, 0f);
+			greenSprite.color = new Color(1f, 1f, 1f, (float)opacity / 100);
+		} else {
+			redSprite.color = new Color(1f, 1f, 1f, Mathf.Abs(opacity) / 100);
+			greenSprite.color = new Color(1f, 1f, 1f, 0);
+		}
 	}
 
 	// Make the tardigrade interact with the provided object
 	public void interact(GameObject theObject) {
 		InteractableController controller = theObject.GetComponent<InteractableController>();
 		int sensitivity = this.sensitivity[controller.type][controller.variant];
-		this.opacity += sensitivity / 2;
-		print("Opacity: "+ this.opacity);
+		opacity += sensitivity / 2;
+		print("Opacity: "+ opacity);
 
-		if(this.opacity > 0) {
-			this.redSprite.color = new Color(1f, 1f, 1f, 0f);
-			this.greenSprite.color = new Color(1f, 1f, 1f, (float)this.opacity / 100);
+		if(opacity > 0) {
+			redSprite.color = new Color(1f, 1f, 1f, 0f);
+			greenSprite.color = new Color(1f, 1f, 1f, (float)opacity / 100);
 		} else {
-			this.redSprite.color = new Color(1f, 1f, 1f, Mathf.Abs(this.opacity) / 100);
-			this.greenSprite.color = new Color(1f, 1f, 1f, 0);
+			redSprite.color = new Color(1f, 1f, 1f, Mathf.Abs(opacity) / 100);
+			greenSprite.color = new Color(1f, 1f, 1f, 0);
 		}
 		if(controller.type == 1) {
 			this.foodRemaining--;
@@ -85,16 +95,10 @@ public class TardigradeController : MonoBehaviour {
 	}
 
 	protected void nextLevel() {
-		this.nextState.SetActive(true);
-		this.gameObject.SetActive(false);
-
-		/*
-		GameObject nextLevel = GameObject.Find("Tardigrade"+nextStage);
-		print(nextLevel);
-		/*	TardigradeController[] tardigrades = FindObjectsOfType(
-	       typeof(TardigradeController)
-	     ) as TardigradeController[];
-			 print(tardigrades.Length);*/
+		if(this.nextState != null) {
+			this.nextState.SetActive(true);
+			this.gameObject.SetActive(false);
+		}
 	}
 
 	protected void fillSensitivity() {
