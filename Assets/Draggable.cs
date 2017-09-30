@@ -13,6 +13,8 @@ public class Draggable : MonoBehaviour {
 
   protected Vector3 screenPoint;
 
+  protected Rigidbody2D rigidBody;
+
   public void start() {
   }
 
@@ -20,6 +22,10 @@ public class Draggable : MonoBehaviour {
   {
       this.initialX = transform.position.x;
       this.initialY = transform.position.y;
+      this.rigidBody = gameObject.AddComponent<Rigidbody2D>();
+      this.rigidBody.gravityScale = 0;
+      this.rigidBody.mass = 1;
+      this.rigidBody.angularDrag = 0.05f;
       offset = gameObject.transform.position -
           Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
   }
@@ -31,10 +37,12 @@ public class Draggable : MonoBehaviour {
   }
 
   void OnMouseUp() {
+    Destroy(this.rigidBody);
     transform.position = new Vector3(initialX, initialY);
     transform.localEulerAngles = new Vector3(0, 0, 0);
   }
 
   void OnCollisionEnter2D (Collision2D collision) {
+    print("On collission");
   }
 }

@@ -10,6 +10,14 @@ public class InteractableController : MonoBehaviour {
 
 	protected BoxCollider2D boxCollider;
 
+	public void OnMouseDown() {
+		this.spriteRenderer.sortingLayerName = "Moving";
+	}
+
+	public void OnMouseUp() {
+		this.spriteRenderer.sortingLayerName = "Foreground";
+	}
+
 	// Use this for initialization
 	void Start () {
 		this.spriteRenderer = this.GetComponent<SpriteRenderer>();

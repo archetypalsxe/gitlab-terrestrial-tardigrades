@@ -44,3 +44,6 @@ TagManager:
   - name: Foreground
     uniqueID: 1985548487
     locked: 0
+  - name: Moving
+    uniqueID: 874463343
+    locked: 0
