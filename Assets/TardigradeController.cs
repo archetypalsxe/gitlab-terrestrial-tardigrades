@@ -16,9 +16,7 @@ public class TardigradeController : MonoBehaviour {
 
 	// Make the tardigrade interact with the provided object
 	public void interact(GameObject theObject) {
-		print ("Interacting");
 		InteractableController controller = theObject.GetComponent<InteractableController>();
-		print(controller);
 		print(controller.type);
 		print(controller.variant);
 
