@@ -16,7 +16,7 @@ public class InteractableController : MonoBehaviour {
 	public int type = 1;
 
 	/**
-		1 - 3
+		1 - 5
 	*/
 	public int variant = 1;
 
