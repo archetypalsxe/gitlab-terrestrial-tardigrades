@@ -405,6 +405,7 @@ GameObject:
   - component: {fileID: 1197601765}
   - component: {fileID: 1197601767}
   - component: {fileID: 1197601768}
+  - component: {fileID: 1197601769}
   m_Layer: 0
   m_Name: scientist
   m_TagString: Untagged
@@ -503,6 +504,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 13.76, y: 16.56}
   m_EdgeRadius: 0
+--- !u!114 &1197601769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1197601764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dfd1c18843674a37a8f539f72261ff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1369516002
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,6 +615,7 @@ GameObject:
   - component: {fileID: 2043867177}
   - component: {fileID: 2043867179}
   - component: {fileID: 2043867180}
+  - component: {fileID: 2043867181}
   m_Layer: 0
   m_Name: tardigrade
   m_TagString: Untagged
@@ -701,3 +714,14 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &2043867181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2043867176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53b593fccdd5a44738b31f4f36d2bdda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

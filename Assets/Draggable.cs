@@ -13,6 +13,9 @@ public class Draggable : MonoBehaviour {
 
   protected Vector3 screenPoint;
 
+  public void start() {
+  }
+
   void OnMouseDown()
   {
       this.initialX = transform.position.x;
@@ -29,7 +32,7 @@ public class Draggable : MonoBehaviour {
 
   void OnMouseUp() {
     transform.position = new Vector3(initialX, initialY);
-    transform.Rotate(0, 0, 0);
+    transform.localEulerAngles = new Vector3(0, 0, 0);
   }
 
   void OnCollisionEnter2D (Collision2D collision) {
