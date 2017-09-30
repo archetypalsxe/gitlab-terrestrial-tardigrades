@@ -6,6 +6,20 @@ public class InteractableController : MonoBehaviour {
 
 	public Sprite sprite;
 
+	public double scaleAdjuster = 2;
+
+	/**
+		1 = food
+		2 = chemical
+		3 = device
+		*/
+	public int type = 1;
+
+	/**
+		1 - 3
+	*/
+	public int variant = 1;
+
 	protected SpriteRenderer spriteRenderer;
 
 	protected BoxCollider2D boxCollider;
@@ -25,7 +39,7 @@ public class InteractableController : MonoBehaviour {
 		if(this.spriteRenderer.sprite == null) {
 			this.spriteRenderer.sprite = sprite;
 			double initialX = this.spriteRenderer.sprite.bounds.size.x;
-			double scaleAdjustment = (double)2 / initialX;
+			double scaleAdjustment = this.scaleAdjuster / initialX;
 			this.transform.localScale = new Vector2((float)scaleAdjustment, (float)scaleAdjustment);
 
 			// @TODO Don't know why 5 works...

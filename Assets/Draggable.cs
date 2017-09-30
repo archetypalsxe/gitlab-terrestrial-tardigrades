@@ -15,6 +15,8 @@ public class Draggable : MonoBehaviour {
 
   protected Rigidbody2D rigidBody;
 
+  protected Collision2D collision;
+
   public void start() {
   }
 
@@ -37,12 +39,24 @@ public class Draggable : MonoBehaviour {
   }
 
   void OnMouseUp() {
+    if(this.collision != null) {
+      if (this.collision.gameObject.CompareTag("tardigrade")) {
+         TardigradeController tardigrade = GameObject.FindObjectOfType(
+            typeof(TardigradeController)
+          ) as TardigradeController;
+          tardigrade.interact(this.gameObject);
+      }
+    }
     Destroy(this.rigidBody);
     transform.position = new Vector3(initialX, initialY);
     transform.localEulerAngles = new Vector3(0, 0, 0);
   }
 
   void OnCollisionEnter2D (Collision2D collision) {
-    print("On collission");
+    this.collision = collision;
+  }
+
+  void OnCollisionExit2D (Collision2D collision) {
+    this.collision = null;
   }
 }

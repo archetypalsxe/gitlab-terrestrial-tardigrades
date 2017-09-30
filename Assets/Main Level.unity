@@ -180,7 +180,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &852617725
 MonoBehaviour:
@@ -194,6 +194,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 42fd89827fa964d0e81af84c8a1fc221, type: 3}
+  scaleAdjuster: 2
+  type: 1
+  variant: 1
 --- !u!114 &852617726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,6 +300,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: b12a66e7043c5497ba9a0810b1df2122, type: 3}
+  scaleAdjuster: 2
+  type: 2
+  variant: 1
 --- !u!212 &894010270
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -350,7 +356,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1197601764
 GameObject:
@@ -362,7 +368,6 @@ GameObject:
   - component: {fileID: 1197601766}
   - component: {fileID: 1197601765}
   - component: {fileID: 1197601767}
-  - component: {fileID: 1197601768}
   - component: {fileID: 1197601769}
   m_Layer: 0
   m_Name: scientist
@@ -437,31 +442,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dfd1c18843674a37a8f539f72261ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &1197601768
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1197601764}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 13.76, y: 16.56}
-    newSize: {x: 13.76, y: 16.56}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 13.76, y: 16.56}
-  m_EdgeRadius: 0
 --- !u!114 &1197601769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,7 +556,7 @@ GameObject:
   - component: {fileID: 2043867181}
   m_Layer: 0
   m_Name: tardigrade
-  m_TagString: Untagged
+  m_TagString: tardigrade
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -634,7 +614,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.5280001}
 --- !u!114 &2043867179
 MonoBehaviour:
