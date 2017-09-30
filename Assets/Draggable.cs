@@ -35,10 +35,6 @@ public class Draggable : MonoBehaviour {
     print("Collission detected");
   }
 
-  void OnCollisionStay2D (Collision2D collission) {
-    print("Staying");
-  }
-
   void OnTriggerEnter (Collider collisionObject) {
     print("Whoa!");
   }
