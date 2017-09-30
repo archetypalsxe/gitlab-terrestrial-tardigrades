@@ -34,6 +34,20 @@ public class Draggable : MonoBehaviour {
 
   void OnMouseDrag()
   {
+    TardigradeController tardigrade = GameObject.FindObjectOfType(
+       typeof(TardigradeController)
+     ) as TardigradeController;
+    InteractableController controller = this.gameObject.GetComponent<InteractableController>();
+
+    if(controller.type == 1) {
+      if(tardigrade.foodRemaining < 1) {
+        return;
+      }
+    } else {
+      if(tardigrade.potionsRemaining < 1) {
+        return;
+      }
+    }
       Vector3 newPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f);
       transform.position = Camera.main.ScreenToWorldPoint(newPosition) + offset;
   }

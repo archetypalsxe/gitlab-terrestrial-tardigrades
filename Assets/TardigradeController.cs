@@ -6,6 +6,8 @@ public class TardigradeController : MonoBehaviour {
 
 	public SpriteRenderer spriteRenderer;
 
+	public string nextStage;
+
 	/**
 	  [type] => [variant] => percentage
 		1=>
@@ -22,6 +24,9 @@ public class TardigradeController : MonoBehaviour {
 	protected SpriteRenderer redSprite;
 	protected SpriteRenderer greenSprite;
 	protected float opacity = 0f;
+
+	public int potionsRemaining = 3;
+	public int foodRemaining = 1;
 
 	// Use this for initialization
 	void Start () {
@@ -70,8 +75,17 @@ public class TardigradeController : MonoBehaviour {
 			this.redSprite.color = new Color(1f, 1f, 1f, Mathf.Abs(this.opacity) / 100);
 			this.greenSprite.color = new Color(1f, 1f, 1f, 0);
 		}
-		//redOpacity += 0.1f;
-		//this.redSprite.color = new Color(1f, 1f, 1f, opacityChange);
+		if(controller.type == 1) {
+			this.foodRemaining--;
+		} else {
+			this.potionsRemaining--;
+		}
+		if(this.foodRemaining < 1 && this.potionsRemaining < 1) {
+			this.nextLevel();
+		}
+	}
+
+	protected void nextLevel() {
 	}
 
 	protected void fillSensitivity() {
