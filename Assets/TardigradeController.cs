@@ -20,24 +20,22 @@ public class TardigradeController : MonoBehaviour {
 	protected int[][] sensitivity = new int[3][];
 
 	protected SpriteRenderer redSprite;
-	protected float redOpacity = 0f;
-
 	protected SpriteRenderer greenSprite;
-	protected float greenOpacity = 0f;
+	protected float opacity = 0f;
 
 	// Use this for initialization
 	void Start () {
 		this.fillSensitivity();
-		this.debugSensitivity();
+		//this.debugSensitivity();
 		SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
 		for(int counter = 0; counter < sprites.Length; counter++) {
 			if(sprites[counter].sprite.name.Contains("Red")) {
 				this.redSprite = sprites[counter];
-				this.redSprite.color = new Color(1f, 1f, 1f, redOpacity);
+				this.redSprite.color = new Color(1f, 1f, 1f, 0f);
 			}
 			if(sprites[counter].sprite.name.Contains("Green")) {
 				this.greenSprite = sprites[counter];
-				this.greenSprite.color = new Color(1f, 1f, 1f, greenOpacity);
+				this.greenSprite.color = new Color(1f, 1f, 1f, 0f);
 			}
 		}
 
@@ -59,9 +57,21 @@ public class TardigradeController : MonoBehaviour {
 
 	// Make the tardigrade interact with the provided object
 	public void interact(GameObject theObject) {
-		//InteractableController controller = theObject.GetComponent<InteractableController>();
-		redOpacity += 0.1f;
-		this.redSprite.color = new Color(1f, 1f, 1f, redOpacity);
+		InteractableController controller = theObject.GetComponent<InteractableController>();
+		int sensitivity = this.sensitivity[controller.type][controller.variant];
+		print("Sensitivity: "+ sensitivity);
+		this.opacity += sensitivity / 2;
+		print("Opacity: "+ this.opacity);
+
+		if(this.opacity > 0) {
+			this.redSprite.color = new Color(1f, 1f, 1f, 0f);
+			this.greenSprite.color = new Color(1f, 1f, 1f, (float)this.opacity / 100);
+		} else {
+			this.redSprite.color = new Color(1f, 1f, 1f, Mathf.Abs(this.opacity) / 100);
+			this.greenSprite.color = new Color(1f, 1f, 1f, 0);
+		}
+		//redOpacity += 0.1f;
+		//this.redSprite.color = new Color(1f, 1f, 1f, opacityChange);
 	}
 
 	protected void fillSensitivity() {
@@ -71,19 +81,19 @@ public class TardigradeController : MonoBehaviour {
 				// Switching variant to a min/max
 				switch(variant) {
 					case 1:
-						this.randomizeSensitivity(type, -100, -75);
+						this.randomizeSensitivity(type, -100, -50);
 						break;
 					case 2:
-						this.randomizeSensitivity(type, -75, -49);
+						this.randomizeSensitivity(type, -50, 0);
 						break;
 					case 3:
-						this.randomizeSensitivity(type, 50, 50);
+						this.randomizeSensitivity(type, 0, 0);
 						break;
 					case 4:
-						this.randomizeSensitivity(type, 51, 74);
+						this.randomizeSensitivity(type, 0, 50);
 						break;
 					case 5:
-						this.randomizeSensitivity(type, 75, 100);
+						this.randomizeSensitivity(type, 50, 100);
 						break;
 				}
 			}
