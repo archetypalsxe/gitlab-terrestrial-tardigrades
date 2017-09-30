@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class TardigradeController : MonoBehaviour {
@@ -98,6 +99,11 @@ public class TardigradeController : MonoBehaviour {
 		if(this.nextState != null) {
 			this.nextState.SetActive(true);
 			this.gameObject.SetActive(false);
+		} else {
+			SceneManager.LoadScene(
+        "VictoryScreen",
+        LoadSceneMode.Single
+    );
 		}
 	}
 
