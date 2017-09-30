@@ -6,7 +6,7 @@ public class TardigradeController : MonoBehaviour {
 
 	public SpriteRenderer spriteRenderer;
 
-	public string nextStage;
+	public GameObject nextState;
 
 	/**
 	  [type] => [variant] => percentage
@@ -64,7 +64,6 @@ public class TardigradeController : MonoBehaviour {
 	public void interact(GameObject theObject) {
 		InteractableController controller = theObject.GetComponent<InteractableController>();
 		int sensitivity = this.sensitivity[controller.type][controller.variant];
-		print("Sensitivity: "+ sensitivity);
 		this.opacity += sensitivity / 2;
 		print("Opacity: "+ this.opacity);
 
@@ -86,6 +85,16 @@ public class TardigradeController : MonoBehaviour {
 	}
 
 	protected void nextLevel() {
+		this.nextState.SetActive(true);
+		this.gameObject.SetActive(false);
+
+		/*
+		GameObject nextLevel = GameObject.Find("Tardigrade"+nextStage);
+		print(nextLevel);
+		/*	TardigradeController[] tardigrades = FindObjectsOfType(
+	       typeof(TardigradeController)
+	     ) as TardigradeController[];
+			 print(tardigrades.Length);*/
 	}
 
 	protected void fillSensitivity() {
