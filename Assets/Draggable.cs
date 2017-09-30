@@ -29,13 +29,9 @@ public class Draggable : MonoBehaviour {
 
   void OnMouseUp() {
     transform.position = new Vector3(initialX, initialY);
+    transform.Rotate(0, 0, 0);
   }
 
   void OnCollisionEnter2D (Collision2D collision) {
-    print("Collission detected");
-  }
-
-  void OnTriggerEnter (Collider collisionObject) {
-    print("Whoa!");
   }
 }

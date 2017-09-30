@@ -8,12 +8,20 @@ public class InteractableController : MonoBehaviour {
 
 	protected SpriteRenderer spriteRenderer;
 
+	protected BoxCollider2D boxCollider;
+
 	// Use this for initialization
 	void Start () {
-		this.spriteRenderer = GetComponent<SpriteRenderer>();
+		this.spriteRenderer = this.GetComponent<SpriteRenderer>();
+		this.boxCollider = this.GetComponent<BoxCollider2D>();
 		if(this.spriteRenderer.sprite == null) {
 			this.spriteRenderer.sprite = sprite;
-			transform.localScale = new Vector3(0.1f, 0.1f, 0f);
+			double initialX = this.spriteRenderer.sprite.bounds.size.x;
+			double scaleAdjustment = (double)2 / initialX;
+			this.transform.localScale = new Vector2((float)scaleAdjustment, (float)scaleAdjustment);
+
+			// @TODO Don't know why 5 works...
+			this.boxCollider.size = this.spriteRenderer.bounds.size * 5;
 		}
 	}
 
