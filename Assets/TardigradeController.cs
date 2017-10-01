@@ -115,6 +115,13 @@ public class TardigradeController : MonoBehaviour {
 		int sensitivity = this.sensitivity[controller.type][controller.variant];
 		opacity += sensitivity / 2;
 		print("Opacity: "+ opacity);
+		if(opacity <= -100) {
+			opacity = 0f;
+			SceneManager.LoadScene(
+				"DeathScreen",
+				LoadSceneMode.Single
+			);
+		}
 
 		if(opacity > 0) {
 			this.setGreenColor(new Color(1f, 1f, 1f, (float)opacity / 100));
@@ -136,10 +143,17 @@ public class TardigradeController : MonoBehaviour {
 			this.nextState.SetActive(true);
 			this.gameObject.SetActive(false);
 		} else {
-			SceneManager.LoadScene(
-        "VictoryScreen",
-        LoadSceneMode.Single
-    );
+			if(opacity >= 75) {
+				SceneManager.LoadScene(
+	        "VictoryScreen",
+	        LoadSceneMode.Single
+	    	);
+			} else {
+				SceneManager.LoadScene(
+	        "NeutralEnding",
+	        LoadSceneMode.Single
+	    	);
+			}
 		}
 	}
 
