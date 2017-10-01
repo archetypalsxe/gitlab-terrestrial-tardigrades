@@ -320,6 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b593fccdd5a44738b31f4f36d2bdda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTutorial: 0
   spriteRenderer: {fileID: 0}
   nextState: {fileID: 311751386}
   potionsRemaining: 3
@@ -602,6 +603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b593fccdd5a44738b31f4f36d2bdda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTutorial: 0
   spriteRenderer: {fileID: 0}
   nextState: {fileID: 925720705}
   potionsRemaining: 3
@@ -783,6 +785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b593fccdd5a44738b31f4f36d2bdda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTutorial: 0
   spriteRenderer: {fileID: 0}
   nextState: {fileID: 217290314}
   potionsRemaining: 3
@@ -1530,6 +1533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b593fccdd5a44738b31f4f36d2bdda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTutorial: 0
   spriteRenderer: {fileID: 0}
   nextState: {fileID: 0}
   potionsRemaining: 3
@@ -1964,6 +1968,8 @@ GameObject:
   - component: {fileID: 1369516005}
   - component: {fileID: 1369516004}
   - component: {fileID: 1369516003}
+  - component: {fileID: 1369516009}
+  - component: {fileID: 1369516008}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2041,6 +2047,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1369516008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1369516002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36d01493cfaa4dbb8a0f923f952a83d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1369516009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1369516002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dfd1c18843674a37a8f539f72261ff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalContainer: {fileID: 1369516008}
 --- !u!1 &1538374123
 GameObject:
   m_ObjectHideFlags: 0

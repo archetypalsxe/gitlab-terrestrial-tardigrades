@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class NamingTardigradeScript : MonoBehaviour {
+public class NamingPlayer : MonoBehaviour {
 
 	public GlobalContainer globalContainer;
 
@@ -22,17 +22,10 @@ public class NamingTardigradeScript : MonoBehaviour {
 	}
 
 	protected void SubmitName(string name) {
-		 this.globalContainer.setTardigradeName(name);
-		 if(this.globalContainer.getIsTutorial()) {
-			 SceneManager.LoadScene(
-	 			"Tutorial",
-	 			LoadSceneMode.Single
-	 			);
-		 } else {
-			 SceneManager.LoadScene(
-	 			"Main Level",
-	 			LoadSceneMode.Single
-	 			);
-		 }
+		 this.globalContainer.setPlayerName(name);
+		 SceneManager.LoadScene(
+ 			"GenderSelection",
+ 			LoadSceneMode.Single
+ 			);
 	}
 }

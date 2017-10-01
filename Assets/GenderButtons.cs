@@ -1,12 +1,13 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class StartButtonController : MonoBehaviour {
+public class GenderButtons : MonoBehaviour {
 
 	public Button yourButton;
+	public int gender = 0;
 
 	public GlobalContainer globalContainer;
 
@@ -23,8 +24,9 @@ public class StartButtonController : MonoBehaviour {
 
 	public void TaskOnClick() {
 		this.globalContainer.setIsTutorial(false);
+		this.globalContainer.setGender(gender);
 		SceneManager.LoadScene(
-			"NamingPlayer",
+			"Intro",
 			LoadSceneMode.Single
 			);
 	}

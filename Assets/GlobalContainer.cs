@@ -8,6 +8,11 @@ public class GlobalContainer : MonoBehaviour {
 
 	public static bool isTutorial = false;
 
+	public static string playerName = "player";
+
+	// 0 = male, 1 = female
+	public static int gender = 0;
+
 	// Use this for initialization
 	void Start () {
 
@@ -32,5 +37,26 @@ public class GlobalContainer : MonoBehaviour {
 
 	public bool getIsTutorial() {
 		return isTutorial;
+	}
+
+	public void setPlayerName(string name) {
+		playerName = name;
+	}
+
+	public string getPlayerName() {
+		return playerName;
+	}
+
+	public void setGender(int localGender) {
+		if(localGender > 0) {
+			gender = 1;
+		} else {
+			gender = 0;
+		}
+	}
+
+	// Returns whether or not we have a male player
+	public bool isMale() {
+		return gender < 1;
 	}
 }
