@@ -8,6 +8,8 @@ public class TutorialButton : MonoBehaviour {
 
 	public Button yourButton;
 
+	public GlobalContainer globalContainer;
+
 	// Use this for initialization
 	void Start () {
 		Button btn = yourButton.GetComponent<Button>();
@@ -20,8 +22,9 @@ public class TutorialButton : MonoBehaviour {
 	}
 
 	public void TaskOnClick() {
+		this.globalContainer.setIsTutorial(true);
 		SceneManager.LoadScene(
-			"Tutorial",
+			"NamingTardigrade",
 			LoadSceneMode.Single
 			);
 	}

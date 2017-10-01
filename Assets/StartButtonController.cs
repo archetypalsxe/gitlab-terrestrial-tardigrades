@@ -8,6 +8,8 @@ public class StartButtonController : MonoBehaviour {
 
 	public Button yourButton;
 
+	public GlobalContainer globalContainer;
+
 	// Use this for initialization
 	void Start () {
 		Button btn = yourButton.GetComponent<Button>();
@@ -20,6 +22,7 @@ public class StartButtonController : MonoBehaviour {
 	}
 
 	public void TaskOnClick() {
+		this.globalContainer.setIsTutorial(false);
 		SceneManager.LoadScene(
 			"Main Level",
 			LoadSceneMode.Single

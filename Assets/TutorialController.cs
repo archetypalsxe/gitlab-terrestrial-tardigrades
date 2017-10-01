@@ -8,19 +8,21 @@ public class TutorialController : MonoBehaviour {
 
 	public Text panelText;
 
+	public GlobalContainer globalContainer;
+
 	protected bool doneWithTutorial = false;
 
 
 	public void updateText(int position) {
 		switch (position) {
 			case 1:
-				this.panelText.text = "Oh no!!! The thing a ma bobs changed to red! You hurt the tardigrade!!! Use another potion to help it!";
+				this.panelText.text = "Oh no!!! The thing a ma bobs changed to red! You hurt "+ this.globalContainer.getTardigradeName() +"!!! Use another potion to help it!";
 				break;
 			case 2:
-				this.panelText.text = "Whew! That saved him, they're green now! Give him some food now!";
+				this.panelText.text = "Whew! That saved "+ this.globalContainer.getTardigradeName() +", they're green now! Give him some food now!";
 				break;
 			case 3:
-				this.panelText.text = "That made him even healthier! You're ready to go! Click to continue!";
+				this.panelText.text = "That made "+ this.globalContainer.getTardigradeName() +" even healthier! You're ready to try for real now! Click to continue!";
 				this.doneWithTutorial = true;
 				break;
 		}
@@ -28,7 +30,8 @@ public class TutorialController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		this.panelText.text = "Grab a potion and drag it over to "+
+			this.globalContainer.getTardigradeName() +"!!!";
 	}
 
 	// Update is called once per frame
