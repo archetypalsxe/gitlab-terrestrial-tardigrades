@@ -13,6 +13,10 @@ public class IntroController : MonoBehaviour {
 	public SpriteRenderer shipSprite;
 	public SpriteRenderer secondSpriteMale;
 	public SpriteRenderer secondSpriteFemale;
+	public SpriteRenderer thirdSprite;
+	public SpriteRenderer fourthSprite;
+	public SpriteRenderer fourthSpriteLayer;
+
 	protected SpriteRenderer secondSprite;
 
 	protected bool doneWithIntro = false;
@@ -23,6 +27,9 @@ public class IntroController : MonoBehaviour {
 	void Start () {
 		this.secondSpriteMale.enabled = false;
 		this.secondSpriteFemale.enabled = false;
+		this.thirdSprite.enabled = false;
+		this.fourthSprite.enabled = false;
+		this.fourthSpriteLayer.enabled = false;
 		this.prompt.text = "You're aboard the science vessel, SS Tardiship";
 		IEnumerator coroutine = this.initialScene();
     StartCoroutine(coroutine);
@@ -50,8 +57,16 @@ public class IntroController : MonoBehaviour {
 				);
 				break;
 			case 2:
+				this.thirdSprite.transform.position = new Vector3(
+					(float)(thirdSprite.transform.position.x),
+					(float)(thirdSprite.transform.position.y + 0.0175),
+					0f
+				);
+				//-2.45 -4.82
+				//-2.68 3.65 y = 8.47
 				break;
 			case 3:
+				// Purposely left blank, animations instead of panning
 				break;
 		}
 	}
@@ -74,10 +89,44 @@ public class IntroController : MonoBehaviour {
 		}
 		this.secondSprite.enabled = true;
 		yield return new WaitForSeconds(8);
+		IEnumerator coroutine = this.thirdScene();
+		StartCoroutine(coroutine);
+		this.position++;
+	}
+
+	protected IEnumerator thirdScene () {
+		this.prompt.text = "You have brought a sample onboard to run experiments";
+		this.secondSprite.enabled = false;
+		this.thirdSprite.enabled = true;
+		yield return new WaitForSeconds(8);
+		this.position++;
+		IEnumerator coroutine = this.fourthScene();
+    StartCoroutine(coroutine);
+	}
+
+	protected IEnumerator fourthScene() {
+		this.thirdSprite.enabled = false;
+		this.prompt.text = "You have discovered extra terrestrial life, and it's a tardigrade!";
+		this.fourthSprite.enabled = true;
+		IEnumerator coroutine = this.fourthLayerFlash();
+		StartCoroutine(coroutine);
+		yield return new WaitForSeconds(8);
+		// So it doesn't keep trying to flash
 		this.position++;
 		SceneManager.LoadScene(
 			"NamingTardigrade",
 			LoadSceneMode.Single
 		);
+	}
+
+	protected IEnumerator fourthLayerFlash () {
+		if(this.position != 3) {
+			yield return new WaitForSeconds(0);
+		} else {
+			yield return new WaitForSeconds(0.5f);
+			this.fourthSpriteLayer.enabled = !this.fourthSpriteLayer.enabled;
+			IEnumerator coroutine = this.fourthLayerFlash();
+			StartCoroutine(coroutine);
+		}
 	}
 }
