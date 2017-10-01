@@ -167,6 +167,7 @@ public class TardigradeController : MonoBehaviour {
 				}
 			}
 		}
+		this.sensitivity[1][5] = -500;
 	}
 
 	protected void randomizeSensitivity(int type, int min, int max) {
