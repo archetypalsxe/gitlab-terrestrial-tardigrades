@@ -149,13 +149,14 @@ public class TardigradeController : MonoBehaviour {
 			this.nextState.SetActive(true);
 			this.gameObject.SetActive(false);
 		} else {
-			opacity = 0f;
 			if(opacity >= 75) {
+				opacity = 0f;
 				SceneManager.LoadScene(
 	        "VictoryScreen",
 	        LoadSceneMode.Single
 	    	);
 			} else {
+				opacity = 0f;
 				SceneManager.LoadScene(
 	        "NeutralEnding",
 	        LoadSceneMode.Single
