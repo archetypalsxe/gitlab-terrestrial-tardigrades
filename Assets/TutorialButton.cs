@@ -24,7 +24,7 @@ public class TutorialButton : MonoBehaviour {
 	public void TaskOnClick() {
 		this.globalContainer.setIsTutorial(true);
 		SceneManager.LoadScene(
-			"NamingTardigrade",
+			"Tutorial",
 			LoadSceneMode.Single
 			);
 	}

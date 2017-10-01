@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GlobalContainer : MonoBehaviour {
 
-	public static string tardigradeName = "tartitot";
+	public static string tardigradeName = "the tartitot";
 
 	public static bool isTutorial = false;
 
