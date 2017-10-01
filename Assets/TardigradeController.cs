@@ -6,6 +6,8 @@ using UnityEngine;
 public class TardigradeController : MonoBehaviour {
 
 	public bool isTutorial = false;
+	public bool haveMicroscope = true;
+	public SpriteRenderer microscope;
 
 	public SpriteRenderer spriteRenderer;
 
@@ -48,10 +50,6 @@ public class TardigradeController : MonoBehaviour {
 				greenSprite.color = new Color(1f, 1f, 1f, 0f);
 			}
 		}
-
-	}
-
-	public void OnEnable() {
 
 	}
 
@@ -135,6 +133,14 @@ public class TardigradeController : MonoBehaviour {
 		}
 		if(this.foodRemaining < 1 && this.potionsRemaining < 1) {
 			this.nextLevel();
+		}
+	}
+
+	public void OnEnable() {
+		if(this.haveMicroscope) {
+			this.microscope.enabled = true;
+		} else {
+			this.microscope.enabled = false;
 		}
 	}
 
