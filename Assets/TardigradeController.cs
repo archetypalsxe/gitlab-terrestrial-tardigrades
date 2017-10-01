@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class TardigradeController : MonoBehaviour {
 
+	public bool isTutorial = false;
+
 	public SpriteRenderer spriteRenderer;
 
 	public GameObject nextState;
@@ -28,6 +30,8 @@ public class TardigradeController : MonoBehaviour {
 
 	public int potionsRemaining = 3;
 	public int foodRemaining = 1;
+
+	protected int tutorialPosition = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -73,17 +77,49 @@ public class TardigradeController : MonoBehaviour {
 
 	// Make the tardigrade interact with the provided object
 	public void interact(GameObject theObject) {
+		if(this.isTutorial) {
+			this.tutorialInteract(theObject);
+		} else {
+			this.normalInteract(theObject);
+		}
+	}
+
+	public void tutorialInteract(GameObject theObject) {
+		switch (this.tutorialPosition) {
+			case 0:
+				opacity = -80f;
+				break;
+			case 1:
+				opacity = 20f;
+				break;
+			case 2:
+				opacity = 80f;
+				break;
+		}
+
+		if(opacity > 0) {
+			this.setGreenColor(new Color(1f, 1f, 1f, (float)opacity / 100));
+		} else {
+			this.setRedColor(new Color(1f, 1f, 1f, Mathf.Abs(opacity) / 100));
+		}
+		this.tutorialPosition++;
+		TutorialController controller = GameObject.FindObjectOfType(
+			typeof(TutorialController)
+		) as TutorialController;
+		controller.updateText(this.tutorialPosition);
+
+	}
+
+	public void normalInteract(GameObject theObject) {
 		InteractableController controller = theObject.GetComponent<InteractableController>();
 		int sensitivity = this.sensitivity[controller.type][controller.variant];
 		opacity += sensitivity / 2;
 		print("Opacity: "+ opacity);
 
 		if(opacity > 0) {
-			redSprite.color = new Color(1f, 1f, 1f, 0f);
-			greenSprite.color = new Color(1f, 1f, 1f, (float)opacity / 100);
+			this.setGreenColor(new Color(1f, 1f, 1f, (float)opacity / 100));
 		} else {
-			redSprite.color = new Color(1f, 1f, 1f, Mathf.Abs(opacity) / 100);
-			greenSprite.color = new Color(1f, 1f, 1f, 0);
+			this.setRedColor(new Color(1f, 1f, 1f, Mathf.Abs(opacity) / 100));
 		}
 		if(controller.type == 1) {
 			this.foodRemaining--;
@@ -144,5 +180,16 @@ public class TardigradeController : MonoBehaviour {
 		} while (shouldContinue);
 	}
 
+	protected void setRedColor(Color color) {
+		print(color);
+		redSprite.color = color;
+		greenSprite.color = new Color(1f, 1f, 1f, 0f);
+		print(redSprite);
+	}
+
+	protected void setGreenColor(Color color) {
+		greenSprite.color = color;
+		redSprite.color = new Color(1f, 1f, 1f, 0);
+	}
 
 }
