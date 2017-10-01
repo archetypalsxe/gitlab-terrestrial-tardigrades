@@ -8,8 +8,14 @@ public class NamingTardigradeScript : MonoBehaviour {
 
 	public GlobalContainer globalContainer;
 
+	public SpriteRenderer wiggles;
+
+	protected bool wiggleEnabled = true;
+
 	// Use this for initialization
 	void Start () {
+		IEnumerator coroutine = this.wiggle();
+		StartCoroutine(coroutine);
 		var input = gameObject.GetComponent<InputField>();
 		var se = new InputField.SubmitEvent();
 		se.AddListener(SubmitName);
@@ -21,7 +27,19 @@ public class NamingTardigradeScript : MonoBehaviour {
 
 	}
 
+	protected IEnumerator wiggle() {
+		if(!this.wiggleEnabled) {
+			yield return new WaitForSeconds(0f);
+		} else {
+			yield return new WaitForSeconds(0.5f);
+			this.wiggles.enabled = !this.wiggles.enabled;
+			IEnumerator coroutine = this.wiggle();
+			StartCoroutine(coroutine);
+		}
+	}
+
 	protected void SubmitName(string name) {
+		this.wiggleEnabled = false;
 		 this.globalContainer.setTardigradeName(name);
 		 if(this.globalContainer.getIsTutorial()) {
 			 SceneManager.LoadScene(
