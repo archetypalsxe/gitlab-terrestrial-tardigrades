@@ -181,10 +181,8 @@ public class TardigradeController : MonoBehaviour {
 	}
 
 	protected void setRedColor(Color color) {
-		print(color);
 		redSprite.color = color;
 		greenSprite.color = new Color(1f, 1f, 1f, 0f);
-		print(redSprite);
 	}
 
 	protected void setGreenColor(Color color) {
