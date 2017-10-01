@@ -6,6 +6,8 @@ public class ScientistController : MonoBehaviour {
 
 	public GlobalContainer globalContainer;
 	public SpriteRenderer pulsingBackground;
+	public SpriteRenderer maleScientist;
+	public SpriteRenderer femaleScientist;
 	public float flashRate = 0f;
 
 	protected float opacity = 0f;
@@ -15,6 +17,11 @@ public class ScientistController : MonoBehaviour {
 	void Start () {
 		print(globalContainer.getPlayerName());
 		print(globalContainer.isMale());
+		if(globalContainer.isMale()) {
+			this.femaleScientist.enabled = false;
+		} else {
+			this.maleScientist.enabled = false;
+		}
 	}
 
 	// Update is called once per frame
