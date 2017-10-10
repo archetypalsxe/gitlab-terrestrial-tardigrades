@@ -425,6 +425,8 @@ GameObject:
   - component: {fileID: 829756149}
   - component: {fileID: 829756148}
   - component: {fileID: 829756147}
+  - component: {fileID: 829756151}
+  - component: {fileID: 829756150}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -477,6 +479,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &829756150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 829756146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53b593fccdd5a44738b31f4f36d2bdda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTutorial: 0
+  haveMicroscope: 1
+  microscope: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  nextState: {fileID: 0}
+  potionsRemaining: 3
+  foodRemaining: 1
+--- !u!114 &829756151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 829756146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 173e31be87c39482c8c1e7a051554087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tardigradeController: {fileID: 829756150}
 --- !u!1 &1077987298
 GameObject:
   m_ObjectHideFlags: 0

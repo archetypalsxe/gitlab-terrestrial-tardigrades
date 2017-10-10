@@ -7,10 +7,9 @@ public class TardigradeController : MonoBehaviour {
 
 	public bool isTutorial = false;
 	public bool haveMicroscope = true;
-	public SpriteRenderer microscope;
 
 	public SpriteRenderer spriteRenderer;
-
+	public SpriteRenderer microscope;
 	public GameObject nextState;
 
 	/**
@@ -28,6 +27,8 @@ public class TardigradeController : MonoBehaviour {
 
 	protected static SpriteRenderer redSprite;
 	protected static SpriteRenderer greenSprite;
+
+	// Health of the tardigrade from -100 to 100
 	protected static float opacity = 0f;
 
 	public int potionsRemaining = 3;
@@ -53,6 +54,11 @@ public class TardigradeController : MonoBehaviour {
 
 	}
 
+	// Set opacity back to 0
+	public void resetOpacity() {
+		opacity = 0f;
+	}
+
 	// Print out the sensitivity
 	public void debugSensitivity() {
 		for(int type = 1; type <= 2; type++) {
@@ -64,12 +70,14 @@ public class TardigradeController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if(opacity > 0) {
-			redSprite.color = new Color(1f, 1f, 1f, 0f);
-			greenSprite.color = new Color(1f, 1f, 1f, (float)opacity / 100);
-		} else {
-			redSprite.color = new Color(1f, 1f, 1f, Mathf.Abs(opacity) / 100);
-			greenSprite.color = new Color(1f, 1f, 1f, 0);
+		if(redSprite != null && greenSprite != null) {
+			if(opacity > 0) {
+				redSprite.color = new Color(1f, 1f, 1f, 0f);
+				greenSprite.color = new Color(1f, 1f, 1f, (float)opacity / 100);
+			} else {
+				redSprite.color = new Color(1f, 1f, 1f, Mathf.Abs(opacity) / 100);
+				greenSprite.color = new Color(1f, 1f, 1f, 0);
+			}
 		}
 	}
 
@@ -137,10 +145,12 @@ public class TardigradeController : MonoBehaviour {
 	}
 
 	public void OnEnable() {
-		if(this.haveMicroscope) {
-			this.microscope.enabled = true;
-		} else {
-			this.microscope.enabled = false;
+		if(this.microscope != null) {
+			if(this.haveMicroscope) {
+				this.microscope.enabled = true;
+			} else {
+				this.microscope.enabled = false;
+			}
 		}
 	}
 
