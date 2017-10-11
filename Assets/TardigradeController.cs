@@ -42,7 +42,7 @@ public class TardigradeController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if(this.warningText != null) {
-			this.warningText.enabled = true;
+			this.warningText.enabled = false;
 		}
 		this.fillSensitivity();
 		//this.debugSensitivity();
@@ -62,7 +62,7 @@ public class TardigradeController : MonoBehaviour {
 
 	public void onEnable() {
 		if(this.warningText != null) {
-			this.warningText.enabled = true;
+			this.warningText.enabled = false;
 		}
 	}
 
@@ -84,7 +84,7 @@ public class TardigradeController : MonoBehaviour {
 	void Update () {
 		if(!this.textHidden && this.warningText != null) {
 			this.textHidden = true;
-			this.warningText.enabled = true;
+			this.warningText.enabled = false;
 		}
 		if(redSprite != null && greenSprite != null) {
 			if(opacity > 0) {
