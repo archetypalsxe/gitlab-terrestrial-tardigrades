@@ -4,6 +4,8 @@ using System.Collections;
 
 public class Draggable : MonoBehaviour {
 
+  protected bool moving = false;
+
   private Vector3 offset;
 
   // Starting X position before moved
@@ -22,6 +24,24 @@ public class Draggable : MonoBehaviour {
 
   void OnMouseDown()
   {
+      this.moving = false;
+      TardigradeController tardigrade = GameObject.FindObjectOfType(
+         typeof(TardigradeController)
+       ) as TardigradeController;
+      InteractableController controller = this.gameObject.GetComponent<InteractableController>();
+      if(controller.type == 1) {
+        if(tardigrade.foodRemaining < 1) {
+          tardigrade.displayFoodError();
+          return;
+        }
+      } else {
+        if(tardigrade.potionsRemaining < 1) {
+          tardigrade.displayChemicalError();
+          return;
+        }
+      }
+      this.moving = true;
+      tardigrade.clearErrors();
       this.initialX = transform.position.x;
       this.initialY = transform.position.y;
       this.rigidBody = gameObject.AddComponent<Rigidbody2D>();
@@ -38,7 +58,7 @@ public class Draggable : MonoBehaviour {
        typeof(TardigradeController)
      ) as TardigradeController;
     InteractableController controller = this.gameObject.GetComponent<InteractableController>();
-
+    this.moving = false;
     if(controller.type == 1) {
       if(tardigrade.foodRemaining < 1) {
         return;
@@ -48,11 +68,15 @@ public class Draggable : MonoBehaviour {
         return;
       }
     }
+    this.moving = true;
       Vector3 newPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f);
       transform.position = Camera.main.ScreenToWorldPoint(newPosition) + offset;
   }
 
   void OnMouseUp() {
+    if(!this.moving) {
+      return;
+    }
     if(this.collision != null) {
        TardigradeController tardigrade = GameObject.FindObjectOfType(
           typeof(TardigradeController)

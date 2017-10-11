@@ -16,13 +16,13 @@ public class TutorialController : MonoBehaviour {
 	public void updateText(int position) {
 		switch (position) {
 			case 1:
-				this.panelText.text = "Oh no!!! The thing a ma bobs changed to red! You hurt "+ this.globalContainer.getTardigradeName() +"!!! Use another potion to help it!";
+				this.panelText.text = "Oh no!!! The thing a ma bobs changed to red! You hurt "+ this.globalContainer.getTardigradeName() +"!!! Use another chemical to help it!";
 				break;
 			case 2:
-				this.panelText.text = "Whew! That saved "+ this.globalContainer.getTardigradeName() +", they're green now! Give him some food now!";
+				this.panelText.text = "Whew! That saved "+ this.globalContainer.getTardigradeName() +", they're green now! Remember, you can only use three chemicals per level! Give him some food now!";
 				break;
 			case 3:
-				this.panelText.text = "That made "+ this.globalContainer.getTardigradeName() +" even healthier! You're ready to try for real now! Click to continue!";
+				this.panelText.text = "That made "+ this.globalContainer.getTardigradeName() +" even healthier! You only have one food per level. You're ready to try for real now! Click to continue!";
 				this.doneWithTutorial = true;
 				break;
 		}

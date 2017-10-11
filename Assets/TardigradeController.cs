@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TardigradeController : MonoBehaviour {
 
 	public bool isTutorial = false;
 	public bool haveMicroscope = true;
+	public Text warningText;
+	public bool textHidden = false;
 
 	public SpriteRenderer spriteRenderer;
 	public SpriteRenderer microscope;
@@ -38,6 +41,9 @@ public class TardigradeController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		if(this.warningText != null) {
+			this.warningText.enabled = true;
+		}
 		this.fillSensitivity();
 		//this.debugSensitivity();
 		SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
@@ -52,6 +58,12 @@ public class TardigradeController : MonoBehaviour {
 			}
 		}
 
+	}
+
+	public void onEnable() {
+		if(this.warningText != null) {
+			this.warningText.enabled = true;
+		}
 	}
 
 	// Set opacity back to 0
@@ -70,6 +82,10 @@ public class TardigradeController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if(!this.textHidden && this.warningText != null) {
+			this.textHidden = true;
+			this.warningText.enabled = true;
+		}
 		if(redSprite != null && greenSprite != null) {
 			if(opacity > 0) {
 				redSprite.color = new Color(1f, 1f, 1f, 0f);
@@ -152,6 +168,23 @@ public class TardigradeController : MonoBehaviour {
 				this.microscope.enabled = false;
 			}
 		}
+	}
+
+	// Hide any chemical/food errors that might be visible
+	public void clearErrors() {
+		this.warningText.enabled = false;
+	}
+
+	// Display an error that they are trying to use unavailable food
+	public void displayFoodError() {
+		this.warningText.text = "You Can Only Use Food Once Per Level. Use a Chemical!";
+		this.warningText.enabled = true;
+	}
+
+	// Display an error that they are trying to use unavailable chemical
+	public void displayChemicalError() {
+		this.warningText.text = "You Can Only Use Three Chemicals Per Level. Use some food!";
+		this.warningText.enabled = true;
 	}
 
 	protected void nextLevel() {
