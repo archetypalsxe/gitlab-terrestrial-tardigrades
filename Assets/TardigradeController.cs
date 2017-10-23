@@ -136,6 +136,9 @@ public class TardigradeController : MonoBehaviour {
 		InteractableController controller = theObject.GetComponent<InteractableController>();
 		int sensitivity = this.sensitivity[controller.type][controller.variant];
 		opacity += sensitivity / 2;
+		if(opacity > 100) {
+			opacity = 100;
+		}
 		print("Opacity: "+ opacity);
 		if(opacity <= -100) {
 			opacity = 0f;
