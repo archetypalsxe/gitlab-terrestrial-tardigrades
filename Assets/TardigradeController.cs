@@ -175,7 +175,9 @@ public class TardigradeController : MonoBehaviour {
 
 	// Hide any chemical/food errors that might be visible
 	public void clearErrors() {
-		this.warningText.enabled = false;
+		if(this.warningText != null) {
+			this.warningText.enabled = false;
+		}
 	}
 
 	// Display an error that they are trying to use unavailable food
