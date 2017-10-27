@@ -27,7 +27,7 @@ public class InteractableController : MonoBehaviour {
 	}
 
 	public void OnMouseUp() {
-		this.spriteRenderer.sortingLayerName = "Foreground";
+		this.spriteRenderer.sortingLayerName = "Moving";
 	}
 
 	// Use this for initialization
