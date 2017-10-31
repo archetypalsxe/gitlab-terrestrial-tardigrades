@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class TutorialController : MonoBehaviour {
 
+	public Draggable[] potions;
+	public Draggable[] food;
 	public Text panelText;
 
 	public GlobalContainer globalContainer;
@@ -19,6 +21,12 @@ public class TutorialController : MonoBehaviour {
 				this.panelText.text = "Oh no!!! The thing a ma bobs changed to red! You hurt "+ this.globalContainer.getTardigradeName() +"!!! Use another chemical to help it!";
 				break;
 			case 2:
+				foreach (Draggable potion in this.potions) {
+					potion.draggable = false;
+				}
+				foreach (Draggable food in this.food) {
+					food.draggable = true;
+				}
 				this.panelText.text = "Whew! That saved "+ this.globalContainer.getTardigradeName() +", they're green now! Remember, you can only use three chemicals per level! Give him some food now!";
 				break;
 			case 3:

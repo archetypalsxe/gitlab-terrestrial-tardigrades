@@ -4,6 +4,8 @@ using System.Collections;
 
 public class Draggable : MonoBehaviour {
 
+  public bool draggable = true;
+
   protected bool moving = false;
 
   private Vector3 offset;
@@ -29,6 +31,9 @@ public class Draggable : MonoBehaviour {
          typeof(TardigradeController)
        ) as TardigradeController;
       InteractableController controller = this.gameObject.GetComponent<InteractableController>();
+      if (!this.draggable) {
+        return;
+      }
       if(controller.type == 1) {
         if(tardigrade.foodRemaining < 1) {
           tardigrade.displayFoodError();
@@ -59,6 +64,9 @@ public class Draggable : MonoBehaviour {
      ) as TardigradeController;
     InteractableController controller = this.gameObject.GetComponent<InteractableController>();
     this.moving = false;
+    if(!this.draggable) {
+      return;
+    }
     if(controller.type == 1) {
       if(tardigrade.foodRemaining < 1) {
         return;
