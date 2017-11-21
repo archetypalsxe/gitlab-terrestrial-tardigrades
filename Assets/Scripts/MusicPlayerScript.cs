@@ -5,27 +5,59 @@ using UnityEngine.Audio;
 
 public class MusicPlayerScript : MonoBehaviour {
 
-	static public bool startAudio = true;
-	public GameObject musicPlayer;
 	public AudioClip mainMusic;
-	public AudioSource musicSource;
+
+	protected AudioSource musicSource;
+
+	private static MusicPlayerScript instance = null;
+	private bool musicPlaying = false;
+
+	public bool isMusicPlaying() {
+		return this.musicPlaying;
+	}
+
+	public void toggleMusic() {
+		if(this.musicPlaying) {
+			this.stopMusic();
+		} else {
+			this.startMusic();
+		}
+		this.musicPlaying = !this.musicPlaying;
+	}
 
 	// Stop the music from playing
 	public void stopMusic() {
-		this.musicSource.Stop();
+		if(this.musicPlaying) {
+			musicSource.Stop();
+		}
 	}
 
 	public void startMusic() {
-		this.musicSource.Play();
+		if(!this.musicPlaying) {
+			musicSource.Play();
+		}
+	}
+
+
+	public void Update() {
+		if(Input.GetKeyDown("m")) {
+			this.toggleMusic();
+		}
 	}
 
 	void Awake() {
-		if (startAudio) {
-			DontDestroyOnLoad (this.musicSource);
-			startAudio = false;
-			this.musicSource.clip = this.mainMusic;
-			this.musicSource.Play();
-			this.musicSource.loop = true;
+		if(instance != null) {
+			Destroy(gameObject);
+		} else {
+			instance = this;
+			DontDestroyOnLoad (gameObject);
+			if(!this.musicPlaying) {
+				this.musicSource = gameObject.AddComponent<AudioSource>();
+				this.musicSource.clip = this.mainMusic;
+				musicSource.Play();
+				musicSource.loop = true;
+				this.musicPlaying = true;
+			}
 		}
 	}
 }
