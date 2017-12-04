@@ -31,6 +31,7 @@ public class MenuController : MonoBehaviour {
 	}
 
 	public void toggleMusic() {
+		print("Toggle music called");
 		if(settings.musicPlaying) {
 			this.musicPlayer.stopMusic();
 			if(this.toggleMusicButton != null) {
