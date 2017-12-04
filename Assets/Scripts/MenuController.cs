@@ -4,26 +4,44 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour {
+	// Object that contains the music player script
+	public MusicPlayerScript musicPlayer;
+	// Button pressed when they are toggling the music on/off
+	public Text toggleMusicButton;
 
-		// Whether or not the music is muted
-		public bool isMusicMuted = false;
-		public SettingsController settings;
+	protected SettingsController settings = null;
+	private static MenuController instance = null;
 
-		// Object that contains the music player script
-		public MusicPlayerScript musicPlayer;
-		// Button pressed when they are toggling the music on/off
+	public void Update() {
+		if(Input.GetKeyDown("m")) {
+			this.toggleMusic();
+		}
+	}
 
-		public Text toggleMusicButton;
+	public void Awake() {
+		if(instance != null) {
+			Destroy(gameObject);
+		} else {
+			print("Continuing");
+			instance = this;
+			DontDestroyOnLoad (gameObject);
+			this.settings = new SettingsController();
+			this.musicPlayer.startMusic();
+		}
+	}
 
-		public void Update() {
-			if(settings.isMusicOn()) {
-				this.toggleMusicButton.text = "Stop Music";
-			} else {
+	public void toggleMusic() {
+		if(settings.musicPlaying) {
+			this.musicPlayer.stopMusic();
+			if(this.toggleMusicButton != null) {
 				this.toggleMusicButton.text = "Play Music";
 			}
+		} else {
+			this.musicPlayer.startMusic();
+			if(this.toggleMusicButton != null) {
+				this.toggleMusicButton.text = "Stop Music";
+			}
 		}
-
-		void Awake() {
-			DontDestroyOnLoad (musicPlayer);
-		}
+		settings.musicPlaying = !settings.musicPlaying;
+	}
 }

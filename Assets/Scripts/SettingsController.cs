@@ -1,27 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 [System.Serializable]
-public class SettingsController : MonoBehaviour {
+public class SettingsController {
 
-	private static SettingsController instance = null;
-	private bool musicPlaying = true;
+	public bool musicPlaying = true;
 
-	public bool isMusicOn() {
-		return this.musicPlaying;
-	}
-
-	public void toggleMusicStatus() {
-		this.musicPlaying = !this.musicPlaying;
-	}
-
-	void Awake() {
-		if(instance != null) {
-			Destroy(gameObject);
-		} else {
-			instance = this;
-			DontDestroyOnLoad (gameObject);
-		}
+	public void saveSettings() {
+		BinaryFormatter bf = new BinaryFormatter();
+		FileStream file = File.Create (Application.persistentDataPath + "/settings.gd");
+		bf.Serialize(file, this);
+		file.Close();
 	}
 }
