@@ -7,6 +7,7 @@ public class MenuController : MonoBehaviour {
 
 		// Whether or not the music is muted
 		public bool isMusicMuted = false;
+		public SettingsController settings;
 
 		// Object that contains the music player script
 		public MusicPlayerScript musicPlayer;
@@ -15,19 +16,14 @@ public class MenuController : MonoBehaviour {
 		public Text toggleMusicButton;
 
 		public void Update() {
-			if(musicPlayer.isMusicPlaying()) {
+			if(settings.isMusicOn()) {
 				this.toggleMusicButton.text = "Stop Music";
 			} else {
 				this.toggleMusicButton.text = "Play Music";
 			}
 		}
 
-		public void toggleMusic() {
-			this.musicPlayer.toggleMusic();
-		}
-
 		void Awake() {
-			print("Awake called");
 			DontDestroyOnLoad (musicPlayer);
 		}
 }
