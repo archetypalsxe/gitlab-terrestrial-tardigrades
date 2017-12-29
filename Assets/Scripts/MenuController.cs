@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+
 
 public class MenuController : MonoBehaviour {
 	// Object that contains the music player script
@@ -22,8 +25,11 @@ public class MenuController : MonoBehaviour {
 		} else {
 			instance = this;
 			DontDestroyOnLoad (gameObject);
-			this.settings = new SettingsController();
-			this.musicPlayer.startMusic();
+			this.loadSettings();
+			if(this.settings.musicPlaying) {
+				this.musicPlayer.startMusic();
+			}
+			this.setMuteMusicButtonText();
 		}
 	}
 
@@ -38,6 +44,11 @@ public class MenuController : MonoBehaviour {
 			this.musicPlayer.startMusic();
 		}
 		settings.musicPlaying = !settings.musicPlaying;
+		this.saveSettings();
+		this.setMuteMusicButtonText();
+	}
+
+	protected void setMuteMusicButtonText() {
 		this.searchForMuteMusicButton();
 		if(this.muteMusicButton != null) {
 			this.muteMusicButton.setText();
@@ -54,4 +65,24 @@ public class MenuController : MonoBehaviour {
 		}
 		this.muteMusicButton = button.GetComponent<MuteMusicButton>();
 	}
+
+
+		protected void saveSettings() {
+			BinaryFormatter bf = new BinaryFormatter();
+			FileStream file = File.Create (Application.persistentDataPath + "/settings.gd");
+			bf.Serialize(file, this.settings);
+			file.Close();
+		}
+
+		protected void loadSettings() {
+			if(File.Exists(Application.persistentDataPath + "/settings.gd")) {
+			    BinaryFormatter bf = new BinaryFormatter();
+			    FileStream file = File.Open(Application.persistentDataPath + "/settings.gd", FileMode.Open);
+			    this.settings = (SettingsController)bf.Deserialize(file);
+			    file.Close();
+			} else {
+				this.settings = new SettingsController();
+			}
+		}
+
 }
