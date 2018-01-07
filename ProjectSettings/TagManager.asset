@@ -19,7 +19,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Super UI
   - 
   - 
   - 
@@ -61,4 +61,7 @@ TagManager:
     locked: 0
   - name: Moving
     uniqueID: 874463343
+    locked: 0
+  - name: Super UI
+    uniqueID: 2908473181
     locked: 0
