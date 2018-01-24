@@ -10,6 +10,7 @@ TagManager:
   - tardigradeColor
   - menuController
   - toggleMusicButton
+  - toggleMusicSetting
   layers:
   - Default
   - TransparentFX
