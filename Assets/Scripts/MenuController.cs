@@ -19,14 +19,13 @@ public class MenuController : MonoBehaviour {
 		}
 	}
 
-	public void Awake() {
+	public void Start() {
 		if(instance != null) {
 			Destroy(gameObject);
 		} else {
 			instance = this;
 			this.loadSettings();
 			this.setMusicPlayer();
-			print(this.settings);
 			if(this.settings.musicPlaying) {
 				this.musicPlayer.startMusic();
 			}
