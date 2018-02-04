@@ -24,17 +24,20 @@ public class MenuController : MonoBehaviour {
 			Destroy(gameObject);
 		} else {
 			instance = this;
-			DontDestroyOnLoad (gameObject);
 			this.loadSettings();
+			this.setMusicPlayer();
+			print(this.settings);
 			if(this.settings.musicPlaying) {
 				this.musicPlayer.startMusic();
 			}
 			this.setMuteMusicButtonText();
+			DontDestroyOnLoad (gameObject);
 		}
 	}
 
 	public bool isMusicPlaying() {
-		return settings.musicPlaying;
+		print(this.settings);
+		return this.settings.musicPlaying;
 	}
 
 	public void toggleMusic() {
@@ -46,6 +49,12 @@ public class MenuController : MonoBehaviour {
 		settings.musicPlaying = !settings.musicPlaying;
 		this.saveSettings();
 		this.setMuteMusicButtonText();
+	}
+
+	protected void setMusicPlayer() {
+		if(this.musicPlayer == null) {
+			this.musicPlayer = GameObject.Find("Music Player").GetComponent<MusicPlayerScript>();
+		}
 	}
 
 	protected void setMuteMusicButtonText() {
@@ -76,10 +85,10 @@ public class MenuController : MonoBehaviour {
 
 		protected void loadSettings() {
 			if(File.Exists(Application.persistentDataPath + "/settings.gd")) {
-			    BinaryFormatter bf = new BinaryFormatter();
-			    FileStream file = File.Open(Application.persistentDataPath + "/settings.gd", FileMode.Open);
-			    this.settings = (SettingsController)bf.Deserialize(file);
-			    file.Close();
+				BinaryFormatter bf = new BinaryFormatter();
+				FileStream file = File.Open(Application.persistentDataPath + "/settings.gd", FileMode.Open);
+				this.settings = (SettingsController)bf.Deserialize(file);
+				file.Close();
 			} else {
 				this.settings = new SettingsController();
 			}

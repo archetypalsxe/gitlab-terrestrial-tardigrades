@@ -16,11 +16,9 @@ public class SettingsMenuButton : MonoBehaviour {
 
 	void DisplayPanel () {
 		if(this.menuController == null) {
-			GameObject gameObject = GameObject.FindGameObjectWithTag("menuController");
-			if(gameObject != null) {
-				this.menuController = gameObject.GetComponent<MenuController>();
-			} else {
-				this.menuController = new MenuController();
+			this.menuController = GameObject.Find("Menu Controller").GetComponent<MenuController>();
+			if (this.menuController == null) {
+				this.menuController = gameObject.AddComponent<MenuController>();
 			}
 		}
 
