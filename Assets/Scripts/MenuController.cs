@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class MenuController : MonoBehaviour {
@@ -11,11 +12,21 @@ public class MenuController : MonoBehaviour {
 
 	protected SettingsController settings = null;
 	protected MuteMusicButton muteMusicButton = null;
+	protected bool settingsLoaded = false;
 	private static MenuController instance = null;
 
 	public void Update() {
 		if(Input.GetKeyDown("m")) {
 			this.toggleMusic();
+		}
+	}
+
+	public void checkToggleButton() {
+		Toggle toggle = GameObject.Find("MusicToggle").GetComponent<Toggle>();
+		if(toggle.isOn) {
+			this.playMusic();
+		} else {
+			this.stopMusic();
 		}
 	}
 
@@ -27,7 +38,7 @@ public class MenuController : MonoBehaviour {
 			this.loadSettings();
 			this.setMusicPlayer();
 			if(this.settings.musicPlaying) {
-				this.musicPlayer.startMusic();
+				this.playMusic();
 			}
 			this.setMuteMusicButtonText();
 			DontDestroyOnLoad (gameObject);
@@ -35,17 +46,34 @@ public class MenuController : MonoBehaviour {
 	}
 
 	public bool isMusicPlaying() {
-		print(this.settings);
+		this.loadSettings();
 		return this.settings.musicPlaying;
 	}
 
+	public void playMusic() {
+		print("Menu Controller - Play Music");
+		this.musicPlayer.startMusic();
+		this.updateSettings(true);
+	}
+
+	public void stopMusic() {
+		print("Menu Controller - Stop Music");
+		this.musicPlayer.stopMusic();
+		this.updateSettings(false);
+	}
+
+
 	public void toggleMusic() {
+		print("Toggling music");
 		if(settings.musicPlaying) {
-			this.musicPlayer.stopMusic();
+			this.stopMusic();
 		} else {
-			this.musicPlayer.startMusic();
+			this.playMusic();
 		}
-		settings.musicPlaying = !settings.musicPlaying;
+	}
+
+	protected void updateSettings(bool isPlaying) {
+		settings.musicPlaying = isPlaying;
 		this.saveSettings();
 		this.setMuteMusicButtonText();
 	}
@@ -83,6 +111,10 @@ public class MenuController : MonoBehaviour {
 		}
 
 		protected void loadSettings() {
+			if(this.settingsLoaded) {
+				return;
+			}
+			this.settingsLoaded = true;
 			if(File.Exists(Application.persistentDataPath + "/settings.gd")) {
 				BinaryFormatter bf = new BinaryFormatter();
 				FileStream file = File.Open(Application.persistentDataPath + "/settings.gd", FileMode.Open);

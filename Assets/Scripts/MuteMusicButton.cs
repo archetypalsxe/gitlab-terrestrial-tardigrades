@@ -19,7 +19,15 @@ public class MuteMusicButton : MonoBehaviour {
 		this.menuController.toggleMusic();
 	}
 
+	public void toggleButtonPressed() {
+		this.findMenuController();
+		this.menuController.checkToggleButton();
+	}
+
 	public void setText() {
+		if(this.toggleMusicButton == null) {
+			return;
+		}
 		this.findMenuController();
 		if(this.menuController.isMusicPlaying()) {
 			this.toggleMusicButton.text = "Stop Music";

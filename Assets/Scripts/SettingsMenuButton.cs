@@ -30,6 +30,9 @@ public class SettingsMenuButton : MonoBehaviour {
 
 		if(this.toggleButton != null && this.menuController != null) {
 			this.toggleButton.isOn = menuController.isMusicPlaying();
+			if(this.toggleButton.isOn) {
+				menuController.playMusic();
+			}
 		}
 
 		this.settingsPanel.GetComponent<CanvasGroup>().alpha = 1;
