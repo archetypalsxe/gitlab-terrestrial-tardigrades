@@ -44,6 +44,7 @@ public class SettingsMenuButton : MonoBehaviour {
 	}
 
 	public void TogglePanel () {
+		print("Toggling");
 		if(this.settingsPanel.activeSelf) {
 			this.HidePanel();
 		} else {

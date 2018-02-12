@@ -12,14 +12,12 @@ public class MusicPlayerScript : MonoBehaviour {
 
 	// Stop the music from playing
 	public void stopMusic() {
-		print("Stopping music");
 		if(musicSource.isPlaying) {
 			musicSource.Stop();
 		}
 	}
 
 	public void startMusic() {
-		print("Starting music");
 		if(!musicSource.isPlaying) {
 			musicSource.Play();
 		}

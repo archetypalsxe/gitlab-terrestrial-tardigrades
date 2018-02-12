@@ -51,20 +51,17 @@ public class MenuController : MonoBehaviour {
 	}
 
 	public void playMusic() {
-		print("Menu Controller - Play Music");
 		this.musicPlayer.startMusic();
 		this.updateSettings(true);
 	}
 
 	public void stopMusic() {
-		print("Menu Controller - Stop Music");
 		this.musicPlayer.stopMusic();
 		this.updateSettings(false);
 	}
 
 
 	public void toggleMusic() {
-		print("Toggling music");
 		if(settings.musicPlaying) {
 			this.stopMusic();
 		} else {
